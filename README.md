@@ -7,6 +7,17 @@ Solutions for [Advent of Code](https://adventofcode.com/) in [Rust](https://www.
 <!--- advent_readme_stars table --->
 
 <!--- benchmarking table --->
+## Benchmarks
+
+| Day | Part 1 | Part 2 |
+| :---: | :---: | :---:  |
+| [Day 1](./src/bin/01.rs) | `134.0µs` | `878.9µs` |
+| [Day 2](./src/bin/02.rs) | `93.1µs` | `91.9µs` |
+| [Day 3](./src/bin/03.rs) | `1.3ms` | `1.3ms` |
+| [Day 4](./src/bin/04.rs) | `281.2µs` | `283.4µs` |
+
+**Total: 4.36ms**
+<!--- benchmarking table --->
 
 ---
 
@@ -41,8 +52,8 @@ cargo scaffold <day>
 
 # output:
 # Created module file "src/bin/01.rs"
-# Created empty input file "data/inputs/01.txt"
-# Created empty example file "data/examples/01.txt"
+# Created empty input file "data/inputs/01-1.txt"
+# Created empty example file "data/examples/01-1.txt"
 # ---
 # 🎄 Type `cargo solve 01` to run your solution.
 ```
@@ -69,9 +80,9 @@ cargo download <day>
 # output:
 # [INFO  aoc] 🎄 aoc-cli - Advent of Code command-line tool
 # [INFO  aoc_client] 🎅 Saved puzzle to 'data/puzzles/01.md'
-# [INFO  aoc_client] 🎅 Saved input to 'data/inputs/01.txt'
+# [INFO  aoc_client] 🎅 Saved input to 'data/inputs/01-1.txt'
 # ---
-# 🎄 Successfully wrote input to "data/inputs/01.txt".
+# 🎄 Successfully wrote input to "data/inputs/01-1.txt".
 # 🎄 Successfully wrote puzzle to "data/puzzles/01.md".
 ```
 
