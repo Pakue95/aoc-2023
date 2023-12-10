@@ -1,6 +1,8 @@
 advent_of_code::solution!(3);
+extern crate timeit;
 use array2d::Array2D;
 use itertools::Itertools;
+
 
 #[derive(Debug, Clone, Eq, PartialEq, Hash)]
 struct PartNum {
@@ -65,9 +67,10 @@ fn index_part_nums(arr: &Array2D<char>) -> Vec<PartNum> {
 }
 
 pub fn part_one(input: &str) -> Option<u32> {
-    let char_vec: Vec<Vec<char>> = input.lines().map(|x| x.chars().collect()).collect();
-
-    let grid = Array2D::from_rows(&char_vec).expect("Array2D from char vector had an error!");
+    let n_rows: usize = input.lines().count();
+    let n_col: usize = input.lines().next().unwrap().len();
+    let char_it = input.chars().filter(|x| *x != '\n');
+    let grid = Array2D::from_iter_row_major(char_it, n_rows, n_col).expect("INPUT");
 
     // Search all part numbers with their positions in the input
     let all_part_num = index_part_nums(&grid);
@@ -91,9 +94,10 @@ pub fn part_one(input: &str) -> Option<u32> {
 }
 
 pub fn part_two(input: &str) -> Option<u32> {
-    let char_vec: Vec<Vec<char>> = input.lines().map(|x| x.chars().collect()).collect();
-
-    let grid = Array2D::from_rows(&char_vec).expect("Array2D from char vector had an error!");
+    let n_rows: usize = input.lines().count();
+    let n_col: usize = input.lines().next().unwrap().len();
+    let char_it = input.chars().filter(|x| *x != '\n');
+    let grid = Array2D::from_iter_row_major(char_it, n_rows, n_col).expect("INPUT");
 
     // Search all part numbers with their positions in the input
     let all_part_num = index_part_nums(&grid);
@@ -130,6 +134,8 @@ pub fn part_two(input: &str) -> Option<u32> {
 
 #[cfg(test)]
 mod tests {
+    use timeit::timeit;
+    use timeit::timeit_loops;
     use super::*;
 
     #[test]
@@ -142,5 +148,26 @@ mod tests {
     fn test_part_two() {
         let result = part_two(&advent_of_code::template::read_file("examples", DAY));
         assert_eq!(result, Some(467835));
+    }
+
+    #[test]
+    fn test_speed() {
+
+        timeit!({
+            let input = &advent_of_code::template::read_file("inputs", DAY);
+            let char_vec: Vec<Vec<char>> = input.lines().map(|x| x.chars().collect()).collect();
+            let _grid = Array2D::from_rows(&char_vec).expect("Array2D from char vector had an error!");
+            // println!("{_grid:?}");
+        });
+
+        timeit!({
+            let input = &advent_of_code::template::read_file("inputs", DAY);
+            let n_rows: usize = input.lines().count();
+            let n_col: usize = input.lines().next().unwrap().len();
+            let char_it = input.lines().map(|x| x.chars()).flatten();
+            // println!("rows: {n_rows} cols: {n_col}, {char_it}");
+            let _grid = Array2D::from_iter_row_major(char_it, n_rows, n_col);
+            // println!("{_grid:?}");
+        });
     }
 }

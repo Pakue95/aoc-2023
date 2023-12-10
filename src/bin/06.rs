@@ -11,11 +11,10 @@ fn parse_input(input: &str) -> Vec<(u32, u32)> {
     time_str_it.next();
     dist_str_it.next();
 
-    let result = time_str_it.zip(dist_str_it).map(|(time, dist)|{
+    time_str_it.zip(dist_str_it).map(|(time, dist)|{
         let out: (u32, u32) = (time.parse().unwrap(), dist.parse().unwrap());
         out
-    }).collect();
-    result
+    }).collect()
 }
 
 fn find_max_options(time: &u32, distance: &u32) -> u32 {
@@ -28,9 +27,9 @@ fn find_max_options(time: &u32, distance: &u32) -> u32 {
 }
 
 fn find_max_options_bin(time: &u64, distance: &u64) -> u64 {
-    let mut lower_bound = *time as u64/2;
+    let mut lower_bound = *time /2;
     let mut left = 0_u64;
-    let mut right = *time as u64;
+    let mut right = *time;
 
     loop {
         let is_in_winning = (time-lower_bound) * lower_bound > *distance;
@@ -39,7 +38,7 @@ fn find_max_options_bin(time: &u64, distance: &u64) -> u64 {
         if is_in_winning && is_lower_border {
             break
         }
-        println!("{lower_bound}");
+        // println!("{lower_bound}");
 
         if (time-lower_bound) * lower_bound > *distance {
             right = lower_bound;
@@ -53,7 +52,7 @@ fn find_max_options_bin(time: &u64, distance: &u64) -> u64 {
             // lower_bound = lower_bound + (right - lower_bound) / 2;
         }
     }
-    println!("low: {lower_bound}");
+    // println!("low: {lower_bound}");
 
     let mut upper_bound= *time/2;
     let mut left = 0;
@@ -66,7 +65,7 @@ fn find_max_options_bin(time: &u64, distance: &u64) -> u64 {
         if is_in_winning && is_upper_border {
             break
         }
-        println!("{upper_bound}");
+        // println!("{upper_bound}");
 
         if (time-upper_bound) * upper_bound > *distance {
             left = upper_bound;
@@ -80,17 +79,17 @@ fn find_max_options_bin(time: &u64, distance: &u64) -> u64 {
             // upper_bound = upper_bound + (right - upper_bound) / 2;
         }
     }
-    println!("high: {upper_bound}");
-    (upper_bound-lower_bound+1)
+    // println!("high: {upper_bound}");
+    upper_bound-lower_bound+1
 }
 
 pub fn part_one(input: &str) -> Option<u32> {
 
     let times = parse_input(input);
-    println!("{times:?}");
+    // println!("{times:?}");
     let maxis = times.iter().map(|(time, distance)| {
         find_max_options(time, distance)
-    }).fold(1,|acc, x| acc*x);
+    }).product::<u32>();
     Some(maxis)
 }
 
@@ -104,16 +103,16 @@ pub fn part_two(input: &str) -> Option<u64> {
     let dist_str: String = dist_str.chars().filter(|x| !x.is_whitespace()).collect();
     let time_str: String = time_str.chars().filter(|x| !x.is_whitespace()).collect();
 
-    println!("dist {dist_str}, time {time_str}");
+    // println!("dist {dist_str}, time {time_str}");
 
     let time: u64 = time_str.parse().unwrap();
     let dist: u64 = dist_str.parse().unwrap();
 
-    println!("dist {dist}, time {time}");
-    println!("test {}", find_max_options_bin(&15, &40));
+    // println!("dist {dist}, time {time}");
+    // println!("test {}", find_max_options_bin(&15, &40));
 
     let result = find_max_options_bin(&time, &dist);
-    println!("{result}");
+    // println!("{result}");
 
     Some(result)
     // find_max_options_bin(&71530, &940200);
