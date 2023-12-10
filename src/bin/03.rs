@@ -150,24 +150,4 @@ mod tests {
         assert_eq!(result, Some(467835));
     }
 
-    #[test]
-    fn test_speed() {
-
-        timeit!({
-            let input = &advent_of_code::template::read_file("inputs", DAY);
-            let char_vec: Vec<Vec<char>> = input.lines().map(|x| x.chars().collect()).collect();
-            let _grid = Array2D::from_rows(&char_vec).expect("Array2D from char vector had an error!");
-            // println!("{_grid:?}");
-        });
-
-        timeit!({
-            let input = &advent_of_code::template::read_file("inputs", DAY);
-            let n_rows: usize = input.lines().count();
-            let n_col: usize = input.lines().next().unwrap().len();
-            let char_it = input.lines().map(|x| x.chars()).flatten();
-            // println!("rows: {n_rows} cols: {n_col}, {char_it}");
-            let _grid = Array2D::from_iter_row_major(char_it, n_rows, n_col);
-            // println!("{_grid:?}");
-        });
-    }
 }
