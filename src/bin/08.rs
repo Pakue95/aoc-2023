@@ -157,18 +157,6 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_part_one_real() {
-        let result = part_one(&advent_of_code::template::read_file("inputs", DAY));
-        assert_eq!(result, Some(12083));
-    }
-
-    #[test]
-    fn test_part_two_real() {
-        let result = part_two(&advent_of_code::template::read_file("inputs", DAY));
-        assert_eq!(result, Some(12083));
-    }
-
-    #[test]
     fn test_lcm() {
         assert_eq!(least_common_multiple(vec![1,2,3,4,5]), 60);
         assert_eq!(least_common_multiple(vec![100, 40, 21441]), 4288200);

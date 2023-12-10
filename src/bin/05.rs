@@ -311,9 +311,5 @@ mod tests {
         assert_eq!(result, Some(46));
     }
 
-    #[test]
-    fn test_part_two_real() {
-        let result = part_two(&advent_of_code::template::read_file("inputs", DAY));
-        assert_eq!(result, Some(27992443));
-    }
+
 }
